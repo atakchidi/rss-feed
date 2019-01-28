@@ -1,0 +1,11 @@
+<div class="container">
+  <mat-card *ngFor="let item of feed$ | async">
+    <mat-card-content>
+      <mat-card-title>{{ item.title }}</mat-card-title>
+      <mat-card-content>{{ item.description }}</mat-card-content>
+      <mat-card-footer>
+        <a [href]="item.link" mat-raised-button color="warm">Read more</a>
+      </mat-card-footer>
+    </mat-card-content>
+  </mat-card>
+</div>

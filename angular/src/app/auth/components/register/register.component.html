@@ -1,0 +1,68 @@
+<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
+  <h1>RSS APP Registration</h1>
+  <div class="register-container" fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex="90%" fxFlex.sm="66%" fxFlex.md="50%" fxFlex.gt-md="33%" class="login-box">
+      <form (ngSubmit)="register()" [formGroup]="registerForm" novalidate>
+        <div class="register-error" [hidden]="!error || isLoading">
+          Something wen't wrong please try again later.
+        </div>
+        <br/>
+        <div fxLayout="column">
+          <mat-form-field>
+            <input type="email" matInput formControlName="email" placeholder="Email" required/>
+            <ng-container *ngIf="registerForm.get('email').dirty">
+              <mat-error *ngIf="registerForm.get('email').hasError('required')">
+                <span>Email is required</span>
+              </mat-error>
+              <mat-error *ngIf="registerForm.get('email').hasError('email')">
+                <span>Invalid email</span>
+              </mat-error>
+              <mat-error *ngIf="registerForm.get('email').hasError('nonUniqMail')">
+                <span>This email is already taken</span>
+              </mat-error>
+            </ng-container>
+          </mat-form-field>
+          <div fxLayout="row" formGroupName="passwords" class="block">
+            <mat-form-field fxFlex.sm="100%" fxFlex.md="50%" fxFlex.gt-md="50%">
+              <input type="password" matInput formControlName="first" placeholder="Password" required/>
+              <ng-container *ngIf="registerForm.get('passwords.first').dirty">
+                <mat-error *ngIf="registerForm.get('passwords.first').hasError('required')">
+                  <span>Field is require</span>
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('passwords.first').hasError('minLength')">
+                  <span>Password is too short</span>
+                </mat-error>
+              </ng-container>
+            </mat-form-field>
+            <mat-form-field fxFlex.sm="100%" fxFlex.md="50%" fxFlex.gt-md="50%">
+              <input type="password" matInput formControlName="second" placeholder="Repeat Password" required/>
+              <ng-container *ngIf="registerForm.get('passwords.second').dirty">
+                <mat-error *ngIf="registerForm.get('passwords.second').hasError('required')">
+                  <span>Field is required</span>
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('passwords.second').hasError('minLength')">
+                  <span>Password is too short</span>
+                </mat-error>
+              </ng-container>
+            </mat-form-field>
+          </div>
+
+          <mat-error *ngIf="registerForm.get('passwords').hasError('notSame') &&
+           registerForm.get('passwords.second').dirty &&
+           registerForm.get('passwords.first').dirty"
+          >
+            <span>Passwords didn't match</span>
+          </mat-error>
+
+          <div class="block">
+            <a class="link" routerLink="../login">Sign in</a>
+          </div>
+          <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid || isLoading">
+            <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+            <span>Register</span>
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

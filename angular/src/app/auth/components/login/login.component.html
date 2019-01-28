@@ -1,0 +1,41 @@
+<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
+  <h1>RSS APP Login</h1>
+  <p *ngIf="showConfirm">
+    Confirmation message has been send to your provided email.
+    You should confirm your email to successfully login.
+  </p>
+  <div class="login-container" fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex="90%" fxFlex.sm="66%" fxFlex.md="50%" fxFlex.gt-md="33%" class="login-box">
+      <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
+        <div class="login-error" [hidden]="!error || isLoading">
+          Email or password incorrect.
+        </div>
+        <div fxLayout="column">
+          <mat-form-field>
+            <input type="email" matInput formControlName="email" autocomplete="email"
+                   placeholder="Email"/>
+          </mat-form-field>
+          <mat-form-field class="block">
+            <input type="password" matInput formControlName="password" autocomplete="current-password"
+                   placeholder="Password"/>
+            <mat-error *ngIf="loginForm.controls.password.valid || loginForm.controls.password.untouched">
+              <span>Password is required</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-slide-toggle color="primary" formControlName="remember" class="block">
+            Remember me
+          </mat-slide-toggle>
+          <p>
+            Don't have an account?
+            <a class="link" routerLink="../register">Sign up</a>
+          </p>
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
+            <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+            <span>Login</span>
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
+
