@@ -1,17 +1,19 @@
 # rss-feed
 
-#Requirements:
-  node & npm
-  docker & docker-compose
-  
-#Set Up:
+# Requirements:
+    - node
+    - npm
+    - docker
+    - docker-compose
 
-cd docker
-./start
-cd ../angular && npm i && npm run start
+# Set Up:
+```
+cd docker ./start cd ../angular && npm i && npm run start
+```
 go to localhost:4200
 
-#Tear Down:
+# Tear Down:
 ctrl + C for angular live server
-cd ./docker
-./stop
+```
+cd ./docker ./stop
+```
