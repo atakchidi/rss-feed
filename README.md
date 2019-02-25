@@ -8,7 +8,7 @@
 
 # Set Up:
 ```
-cd docker ./start cd ../angular && npm i && npm run start
+cd docker && ./start && cd ../angular && npm i && npm run start
 ```
 go to localhost:4200
 
