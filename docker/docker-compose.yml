@@ -10,6 +10,12 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+    node:
+        build: node
+        volumes:
+            - ${ANGULAR_APP_PATH}:/app
+
     php:
         build:
             context: php7-fpm
@@ -17,10 +23,13 @@ services:
                 TIMEZONE: ${TIMEZONE}
         volumes:
             - ${SYMFONY_APP_PATH}:/var/www/symfony
+
     nginx:
         build: nginx
         ports:
             - 8080:80
+        volumes:
+            - ${ANGULAR_APP_PATH}/dist:/var/www/angular
         volumes_from:
             - php
 

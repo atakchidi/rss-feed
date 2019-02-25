@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 docker-compose --project-name altakrss build
+docker-compose --project-name altakrss run --rm node bash -c "npm i && npm run build"
 docker-compose --project-name altakrss up -d
 docker-compose --project-name altakrss exec php composer install --no-dev -o
 docker-compose --project-name altakrss exec php bin/console doctrine:migrations:migrate --no-interaction
