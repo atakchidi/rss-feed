@@ -12,7 +12,11 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
     node:
-        build: node
+        build:
+            context: node
+            args:
+               UID: ${DOCKER_UID}
+               GID: ${DOCKER_GID}
         volumes:
             - ${ANGULAR_APP_PATH}:/app
 
